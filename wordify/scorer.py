@@ -10,6 +10,8 @@ from keras.models import Model
 from keras.layers import GRU, Dense, Input, Embedding
 from keras_pickle_wrapper import KerasPickleWrapper
 
+from wordify.constants import config
+
 
 class CharNNWordEmbedder:
     def __init__(self, charnn_model, char_to_int):
@@ -21,13 +23,13 @@ class CharNNWordEmbedder:
         return self._charnn_model()
     
     def embed_string(self, s):
-        input_ints = [char_to_int[c] for c in s]
+        input_ints = [self.char_to_int[c] for c in s]
         input_seq = np.array([input_ints])
         decoder_state = self.charnn_model.predict(input_seq)
         return decoder_state
     
     def embed_strings(self, strings):
-        input_intss = [[char_to_int[c] for c in s] for s in strings]
+        input_intss = [[self.char_to_int[c] for c in s] for s in strings]
         input_seqs = np.array(input_intss)
         input_seqs = pad_sequences(input_seqs, padding='post')
         decoder_states = self.charnn_model.predict(input_seqs)
@@ -148,10 +150,16 @@ def train_model():
     )
 
 
+def get_phonetic_charnn():
+    with (config.data_loc / 'phonetic_charnn.pickle').open('rb') as f:
+        m = pickle.load(f)
+    return m
+
+
 def main():
     charnn_word_embedder = train_model()
-    with open('/home/nm583/phonetic_charnn.pickle', 'wb') as f:
-        picle.dump(charnn_word_embedder, f)
+    with (config.data_loc / 'phonetic_charnn.pickle').open('wb') as f:
+        pickle.dump(charnn_word_embedder, f)
         
 
 if __name__ == '__main__':

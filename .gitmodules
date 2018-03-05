@@ -1,0 +1,3 @@
+[submodule "libfnr"]
+	path = libfnr
+	url = ./libfnr
