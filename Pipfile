@@ -1,0 +1,36 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+tensorflow = "*"
+keras = "*"
+recurrentshop = {git = "https://www.github.com/datalogai/recurrentshop.git"}
+"seq2seq" = {git = "https://github.com/farizrahman4u/seq2seq.git"}
+ipython = "*"
+notebook = "*"
+jupyterlab = "*"
+"e1839a8" = {path = ".", editable = true}
+pytest = "*"
+matplotlib = "*"
+numpy = "*"
+scipy = "*"
+cython = "*"
+pycryptodomex = "*"
+pyfnr = {git = "https://github.com/laciKE/pyFNR"}
+"h5py" = "*"
+jupyter = "*"
+jupyterlab-launcher = "*"
+
+
+[requires]
+
+python_version = "3.5"

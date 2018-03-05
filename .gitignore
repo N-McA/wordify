@@ -1,0 +1,7 @@
+*egg-info
+*.ipynb
+*.ipynb_checkpoints
+*.pyc
+*.pytest
+*.pytest_cache
+*.swp
