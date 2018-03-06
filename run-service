@@ -1,0 +1,2 @@
+#!/bin/bash
+CUDA_VISIBLE_DEVICES="" FLASK_APP=wordify/service.py python -m flask run

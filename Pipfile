@@ -11,7 +11,6 @@ name = "pypi"
 
 [packages]
 
-tensorflow = "*"
 keras = "*"
 recurrentshop = {git = "https://www.github.com/datalogai/recurrentshop.git"}
 "seq2seq" = {git = "https://github.com/farizrahman4u/seq2seq.git"}
@@ -29,6 +28,10 @@ pyfnr = {git = "https://github.com/laciKE/pyFNR"}
 "h5py" = "*"
 jupyter = "*"
 jupyterlab-launcher = "*"
+pandas = "*"
+unidecode = "*"
+tensorflow-gpu = "*"
+flask = "*"
 
 
 [requires]

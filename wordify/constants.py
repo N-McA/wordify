@@ -11,4 +11,6 @@ root_loc = script_loc / '..'
 config = SimpleNamespace(**{
     'root_loc': root_loc,
     'data_loc': root_loc / 'data',
+    'n_words': 3,
+    'capacity_in_bits': (10**10 - 1).bit_length(),
 })

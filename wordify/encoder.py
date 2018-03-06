@@ -2,15 +2,25 @@
 from pathlib import Path
 import pyFNR
 
+from wordify.constants import config
 
-def load_word_list(data_loc):
-    data_loc = Path(data_loc)
+
+def load_word_list(fpath):
     words = []
-    with (data_loc / 'filtered.txt').open() as f:
+    with fpath.open() as f:
         for line in f:
             words.append(line.strip())
     return words
 
+def load_long_word_list(d):
+    return load_word_list(config.data_loc / 'filtered.txt')
+
+def load_eff_word_list(d):
+    fpath = config.data_loc / 'eff-word-list.txt'
+    words = []
+    for line in fpath.open():
+        words.append(line.strip().split('\t')[-1])
+    return words
 
 def cum_prod(xs):
     r = [1]
