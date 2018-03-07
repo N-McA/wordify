@@ -30,8 +30,9 @@ jupyter = "*"
 jupyterlab-launcher = "*"
 pandas = "*"
 unidecode = "*"
-tensorflow-gpu = "*"
 flask = "*"
+tensorflow = "*"
+flask-cors = "*"
 
 
 [requires]

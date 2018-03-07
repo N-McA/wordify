@@ -1,7 +1,10 @@
 
 from flask import Flask
 from flask import jsonify
+from flask import request
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 import hashlib
 import pickle
@@ -76,3 +79,9 @@ def hello_world():
 @app.route('/codes/<string:email>')
 def get_codes(email):
     return jsonify(get_codes_worker(email))
+
+@app.route('/log', methods=['POST'])
+def log_data():
+    print('DATA:', request.get_json(force=True), flush=True)
+    return "200"
+
