@@ -6,10 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-ssl_context = (
-  '/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/fullchain.pem',
-  '/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/privkey.pem',
-)
+from pathlib import Path
 
 import hashlib
 import pickle
@@ -23,6 +20,7 @@ from wordify.constants import config
 import keras
 import numpy as np
 
+log_file = Path('~/log_file.ndjson').expanduser().open('a')
 words = encoder.load_long_word_list(config.data_loc)
 
 enc = encoder.Encoder(
@@ -89,7 +87,7 @@ def get_codes(email):
 
 @app.route('/log', methods=['POST'])
 def log_data():
-    print('DATA:', request.get_json(force=True), flush=True)
+    print('DATA:', request.get_json(force=True), flush=True, file=log_file)
     return "200"
 
 def parse_args():
