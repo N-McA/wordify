@@ -1,0 +1,2 @@
+#!/bin/bash
+SSL_CERT=/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/fullchain.pem SSL_KEY=/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/privkey.pem LD_LIBRARY_PATH=/root/encoder/libfnr/src/.libs python wordify/service.py
