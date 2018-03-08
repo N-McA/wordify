@@ -33,6 +33,7 @@ unidecode = "*"
 flask = "*"
 tensorflow = "*"
 flask-cors = "*"
+pyopenssl = "*"
 
 
 [requires]

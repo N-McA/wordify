@@ -6,9 +6,16 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+ssl_context = (
+  '/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/fullchain.pem',
+  '/etc/letsencrypt/live/memory-backend.nat-mcaleese.co.uk/privkey.pem',
+)
+
 import hashlib
 import pickle
 from functools import lru_cache
+import argparse
+import os
 
 from wordify import encoder
 from wordify.constants import config
@@ -85,3 +92,19 @@ def log_data():
     print('DATA:', request.get_json(force=True), flush=True)
     return "200"
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--prod', action='store_true')
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    args = parse_args()
+    if args.prod:
+        ssl_context = (
+            os.environ['SSL_CERT_PATH'],
+            os.environ['SSL_KEY_PATH'],
+        )
+        app.run(ssl_context=ssl_context,
+                host='0.0.0.0', debug=False)
+    else:
+        app.run(debug=True)
