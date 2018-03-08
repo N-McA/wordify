@@ -44,7 +44,7 @@ def id_from_email(s):
 START = '<S>'
 END = '<E>'
 model = keras.models.load_model(config.data_loc / 'language_model_weights/weights.hdf5')
-with open('/home/nm583/sfm_data/definition_char_to_int.pickle', 'rb') as f:
+with open('./data/definition_char_to_int.pickle', 'rb') as f:
     char_to_int = pickle.load(f)
 int_to_char = {i:c for c, i in char_to_int.items()}
 

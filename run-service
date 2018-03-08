@@ -1,2 +1,2 @@
 #!/bin/bash
-CUDA_VISIBLE_DEVICES="" FLASK_APP=wordify/service.py python -m flask run
+CUDA_VISIBLE_DEVICES="" FLASK_APP=wordify/service.py python -m flask run --host="0.0.0.0"
