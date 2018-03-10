@@ -107,6 +107,6 @@ if __name__ == "__main__":
             os.environ['SSL_KEY_PATH'],
         )
         app.run(ssl_context=ssl_context,
-                host='0.0.0.0', debug=False)
+                host='0.0.0.0', debug=False, port=443)
     else:
         app.run(debug=True)
