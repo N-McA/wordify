@@ -13,6 +13,7 @@ import pickle
 from functools import lru_cache
 import argparse
 import os
+import json
 
 from wordify import encoder
 from wordify.constants import config
@@ -91,7 +92,7 @@ def get_codes(email):
 
 @app.route('/log', methods=['POST'])
 def log_data():
-    print('DATA:', request.get_json(force=True), flush=True, file=log_file)
+    print('DATA:', json.dumps(request.get_json(force=True)), flush=True, file=log_file)
     return "200"
 
 def parse_args():
