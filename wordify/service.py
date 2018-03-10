@@ -19,6 +19,7 @@ from wordify.constants import config
 
 import keras
 import numpy as np
+import tensorflow as tf
 
 log_file = Path('~/log_file.ndjson').expanduser().open('a')
 words = encoder.load_long_word_list(config.data_loc)
@@ -39,7 +40,7 @@ def ten_digit_hash(s):
 
 def dash_split(n):
     s = str(n).zfill(10)
-    return '-'.join([s[i:i+2] for i in range(0, len(s)-2, 2)])
+    return '-'.join([s[i:i+2] for i in range(0, len(s), 2)])
 
 def id_from_email(s):
     s = s.split('@')[0]
@@ -49,13 +50,16 @@ def id_from_email(s):
 START = '<S>'
 END = '<E>'
 model = keras.models.load_model(config.data_loc / 'language_model_weights/weights.hdf5')
+graph = tf.get_default_graph()
 with open('./data/definition_char_to_int.pickle', 'rb') as f:
     char_to_int = pickle.load(f)
 int_to_char = {i:c for c, i in char_to_int.items()}
 
 def log_prob(seq):
     x = [char_to_int[START]] + [char_to_int[c] for c in seq] + [char_to_int[END]]
-    probs = model.predict(np.array([x]))[0]
+    global graph
+    with graph.as_default():
+        probs = model.predict(np.array([x]))[0]
     log_probs = np.log(probs)
     t = 0
     for i, idx in enumerate(x[1:]):
