@@ -21,8 +21,10 @@ from wordify.constants import config
 import keras
 import numpy as np
 import tensorflow as tf
+import os
 
-log_file = Path('~/log_file.ndjson').expanduser().open('a')
+log_name = '{}_log_file.ndjson'.format(os.getpid())
+log_file = Path('~/' + log_name).expanduser().open('a')
 words = encoder.load_long_word_list(config.data_loc)
 
 enc = encoder.Encoder(
