@@ -34,6 +34,7 @@ flask = "*"
 tensorflow = "*"
 flask-cors = "*"
 pyopenssl = "*"
+gunicorn = "*"
 
 
 [requires]
