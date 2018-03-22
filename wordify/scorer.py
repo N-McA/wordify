@@ -133,10 +133,10 @@ def train_model():
         indices = np.arange(len(xs))
         while True:
             selected = np.random.choice(indices, size=batch_size, replace=False)
-            encoder_inputs = pad_sequences(xs[selected], padding='post')
+            encoder_inputs = pad_sequences(xs[selected], padding='post', value=char_to_int[EOS])
             targets = ys[selected]
             target_seqs = keras.utils.to_categorical(
-                pad_sequences(targets, padding='post'), num_classes=len(phoneme_to_int)
+                pad_sequences(targets, padding='post', value=char_to_int[EOS]), num_classes=len(phoneme_to_int)
             )
             decoder_target_next_outputs = target_seqs[:, 1:]  
             decoder_prev_ideal_outputs = target_seqs[:, :-1]
